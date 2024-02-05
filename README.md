@@ -1,1 +1,1 @@
-# github-action-ijhttp
+# Github Action for Jetbrains IJHTTP

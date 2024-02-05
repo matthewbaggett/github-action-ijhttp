@@ -1,30 +1,30 @@
 # action.yml
-name: "Jetbrains IJHTTP Action"
-description: "Run IJHTTP as part of your github action pipeline"
+name: Jetbrains IJHTTP Action
+description: Run IJHTTP as part of your github action pipeline
 inputs:
   http_file:
-    description: ".http file to run"
+    description: .http file to run
     required: true
   environments_file:
-    description: "Environments file to use"
+    description: Environments file to use
     required: false
   selected_environment:
-    description: "Selected environment"
+    description: Selected environment
     required: false
-    default: "default"
+    default: default
 
 outputs:
   report:
-    description: "Report contents"
+    description: Report contents
 
 runs:
-  using: "docker"
-  image: "Dockerfile"
+  using: docker
+  image: Dockerfile
   env:
     HTTP_FILE: ${{ inputs.http_file }}
     ENVIRONMENTS_FILE: ${{ inputs.environments_file }}
     SELECTED_ENVIRONMENT: ${{ inputs.selected_environment }}
 
 branding:
-  icon: "check-square"
-  color: "white"
+  icon: check-square
+  color: white
