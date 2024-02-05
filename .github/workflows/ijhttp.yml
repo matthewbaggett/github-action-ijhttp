@@ -21,7 +21,7 @@ env:
 
 jobs:
   ijhttp-build:
-    name: Build IJHTTP Container
+    name: Build
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -91,7 +91,7 @@ jobs:
 
   ijhttp-merge:
     runs-on: ubuntu-latest
-    name: Merge IJHTTP Container
+    name: Merge
     needs: [ijhttp-build]
     steps:
       - name: "Setup: Download digests"
