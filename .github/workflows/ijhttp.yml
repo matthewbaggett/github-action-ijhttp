@@ -1,8 +1,6 @@
 name: Build IJHTTP container
 
-permissions:
-  contents: read
-  packages: write
+permissions: write-all
 
 on:
   push:
@@ -17,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  REGISTRY_IMAGE: ghcr.io/matthewbaggett/github-action-ijhttp
+  REGISTRY_IMAGE: ghcr.io/benzine-framework/github-action-ijhttp
 
 jobs:
   ijhttp-build:
@@ -40,6 +38,11 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY_IMAGE }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
 
       - name: "Setup: Setup QEMU"
         uses: docker/setup-qemu-action@v2
@@ -102,6 +105,11 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY_IMAGE }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
 
       - name: "Setup: Login to GHCR"
         uses: docker/login-action@v2
