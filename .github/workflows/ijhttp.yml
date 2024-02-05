@@ -1,6 +1,6 @@
 name: Build IJHTTP container
 
-permissions: read-all
+permissions: write-all
 
 on:
   push:
@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  REGISTRY_IMAGE: ghcr.io/matthewbaggett/ijhttp
+  REGISTRY_IMAGE: ghcr.io/matthewbaggett/github-action-ijhttp
 
 jobs:
   ijhttp-build:
@@ -62,7 +62,7 @@ jobs:
       - name: "Setup: Checkout Source"
         uses: actions/checkout@v4
 
-      - name: "Build: Build & Push Image"
+      - name: "Build: Docker Build"
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -88,6 +88,7 @@ jobs:
 
   ijhttp-merge:
     runs-on: ubuntu-latest
+    name: Merge IJHTTP Container
     needs: [ijhttp-build]
     steps:
       - name: "Setup: Download digests"
