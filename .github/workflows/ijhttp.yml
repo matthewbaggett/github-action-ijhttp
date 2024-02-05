@@ -1,6 +1,8 @@
 name: Build IJHTTP container
 
-permissions: write-all
+permissions:
+  contents: read
+  packages: write
 
 on:
   push:
