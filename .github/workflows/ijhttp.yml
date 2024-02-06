@@ -109,8 +109,8 @@ jobs:
       fail-fast: false
       matrix:
         mirror:
-          - ${{ env.GHCR_REGISTRY_IMAGE }}
-          - ${{ env.DOCKER_REGISTRY_IMAGE }}
+          - ghcr.io/matthewbaggett/github-action-ijhttp
+          - docker.io/matthewbaggett/github-action-ijhttp
     steps:
       - name: "Setup: Download digests"
         uses: actions/download-artifact@v3
