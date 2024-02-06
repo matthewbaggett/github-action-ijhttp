@@ -181,6 +181,5 @@ jobs:
 
       - name: "Merge: Retag for docker hub version"
         run: |
-          docker pull ghcr.io/matthewbaggett/github-action-ijhttp:${{ steps.meta.outputs.version }}
           docker tag ghcr.io/matthewbaggett/github-action-ijhttp:${{ steps.meta.outputs.version }} matthewbaggett/github-action-ijhttp:${{ steps.meta.outputs.version }}
           docker push matthewbaggett/github-action-ijhttp:${{ steps.meta.outputs.version }}
