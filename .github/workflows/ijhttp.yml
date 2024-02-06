@@ -127,12 +127,6 @@ jobs:
     permissions:
       contents: read # For repo checkout
       packages: write # For writing to packages
-    strategy:
-      fail-fast: false
-      matrix:
-        mirror:
-          - ghcr.io/matthewbaggett/github-action-ijhttp
-          - matthewbaggett/github-action-ijhttp
     steps:
       - name: "Setup: Setup Docker Buildx"
         uses: docker/setup-buildx-action@v3
@@ -141,7 +135,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ matrix.mirror }}
+          images: ghcr.io/matthewbaggett/github-action-ijhttp
           labels: |
             org.opencontainers.image.title=IJHTTP
             org.opencontainers.image.description=GitHub Action for IJHTTP
@@ -156,14 +150,12 @@ jobs:
 
       - name: "Setup: Login to Docker Hub"
         uses: docker/login-action@v3
-        if: ${{ ! startsWith(matrix.mirror, 'ghcr.io') }}
         with:
           username: matthewbaggett
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: "Setup: Login to GHCR"
         uses: docker/login-action@v3
-        if: ${{ startsWith(matrix.mirror, 'ghcr.io') }}
         with:
           registry: ghcr.io
           username: matthewbaggett
@@ -181,8 +173,14 @@ jobs:
           docker buildx imagetools create \
             --progress plain \
             $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-            $(printf '${{ matrix.mirror }}@sha256:%s ' *)
+            $(printf 'ghcr.io/matthewbaggett/github-action-ijhttp@sha256:%s ' *)
 
       - name: "Merge: Inspect image"
         run: |
-          docker buildx imagetools inspect ${{ matrix.mirror }}:${{ steps.meta.outputs.version }}
+          docker buildx imagetools inspect ghcr.io/matthewbaggett/github-action-ijhttp:${{ steps.meta.outputs.version }}
+
+      - name: "Merge: Retag for docker hub version"
+        run: |
+          docker pull ghcr.io/matthewbaggett/github-action-ijhttp:${{ steps.meta.outputs.version }}
+          docker tag ghcr.io/matthewbaggett/github-action-ijhttp:${{ steps.meta.outputs.version }} matthewbaggett/github-action-ijhttp:${{ steps.meta.outputs.version }}
+          docker push matthewbaggett/github-action-ijhttp:${{ steps.meta.outputs.version }}
