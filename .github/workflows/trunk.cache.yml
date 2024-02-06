@@ -10,7 +10,7 @@ permissions: read-all
 jobs:
   trunk-cache:
     name: Trunk Cache
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     permissions:
       actions: write
 
