@@ -94,7 +94,7 @@ jobs:
           #tags: ${{ steps.meta.outputs.tags }}
           platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
-          outputs: type=image,name=${{ env.GHCR_REGISTRY_IMAGE }},push-by-digest=true,name-canonical=true,push=true
+          outputs: type=image,name=ghcr.io/matthewbaggett/github-action-ijhttp,push-by-digest=true,name-canonical=true,push=true
           #cache-from: ${{ !env.ACT && 'type=gha,scope=ijhttp-${{ matrix.platform }}' || '' }}
           #cache-to: ${{ !env.ACT && 'type=gha,mode=max,scope=ijhttp-${{ matrix.platform }}' || '' }}
 
