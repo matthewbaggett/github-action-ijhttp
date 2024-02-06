@@ -16,9 +16,11 @@ jobs:
 
     steps:
       - name: Checkout
+        if: ${{ !env.ACT }}
         uses: actions/checkout@v4
 
       - name: Trunk Check
+        if: ${{ !env.ACT }}
         uses: trunk-io/trunk-action@v1
         with:
           check-mode: populate_cache_only
