@@ -1,6 +1,6 @@
 name: Build IJHTTP container
 
-permissions: write-all
+permissions: none
 
 on:
   push:
@@ -31,6 +31,9 @@ jobs:
   ijhttp-build:
     name: Build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read # For repo checkout
+      packages: write # For writing to packages
     needs:
       - trunk-check
     strategy:
@@ -94,9 +97,11 @@ jobs:
           #tags: ${{ steps.meta.outputs.tags }}
           platforms: ${{ matrix.platform }}
           labels: ${{ steps.meta.outputs.labels }}
-          outputs: type=image,name=ghcr.io/matthewbaggett/github-action-ijhttp,push-by-digest=true,name-canonical=true,push=true
-          #cache-from: ${{ !env.ACT && 'type=gha,scope=ijhttp-${{ matrix.platform }}' || '' }}
-          #cache-to: ${{ !env.ACT && 'type=gha,mode=max,scope=ijhttp-${{ matrix.platform }}' || '' }}
+          outputs: |
+            type=image,name=ghcr.io/matthewbaggett/github-action-ijhttp,push-by-digest=true,name-canonical=true,push=true
+            type=image,name=docker.io/matthewbaggett/github-action-ijhttp,push-by-digest=true,name-canonical=true,push=true
+          cache-from: ${{ !env.ACT && 'type=gha,scope=ijhttp-${{ matrix.platform }}' || '' }}
+          cache-to: ${{ !env.ACT && 'type=gha,mode=max,scope=ijhttp-${{ matrix.platform }}' || '' }}
 
       - name: "Build: Export digest"
         run: |
@@ -115,7 +120,11 @@ jobs:
   ijhttp-merge:
     runs-on: ubuntu-latest
     name: Merge
-    needs: [ijhttp-build]
+    needs:
+     - ijhttp-build
+    permissions:
+      contents: read # For repo checkout
+      packages: write # For writing to packages
     strategy:
       fail-fast: false
       matrix:
