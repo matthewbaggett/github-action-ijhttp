@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run ijhttp
-        uses: matthewbaggett/github-action-ijhttp@0.1.1
+        uses: ./. # Use the local action
         with:
           http_file: test/test.http
           environments_file: test/http-client.env.json
