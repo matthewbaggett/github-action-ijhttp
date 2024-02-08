@@ -14,7 +14,7 @@ jobs:
   ijhttp-test:
     runs-on: ubuntu-latest
     steps:
-      - name: "Run ijhttp"
+      - name: Run ijhttp
         uses: matthewbaggett/github-action-ijhttp@0.1.0
         with:
           http_file: test/test.http
