@@ -20,7 +20,7 @@ RUN wget -q -O "ijhttp.zip" "https://jb.gg/ijhttp/latest" && \
     unzip -q "ijhttp.zip" -d "/opt" && \
     rm "ijhttp.zip"
 
-WORKDIR /src
+WORKDIR /github/workspace
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["/opt/ijhttp/ijhttp"]

@@ -1,0 +1,12 @@
+### Get Github Status
+# @name Status
+# @no-cookie-jar
+GET {{endpoint}}/api/v2/summary.json
+Content-Type: application/json
+
+> {%
+    client.test("Status fetch executed successfully", function () {
+        client.assert(response.status === 200);
+        client.assert(response.body.page.name === "GitHub");
+    })
+%}

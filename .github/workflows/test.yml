@@ -1,0 +1,22 @@
+name: Test IJHTTP container works as described
+
+permissions:
+  contents: read
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ijhttp-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  ijhttp-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Run ijhttp"
+        uses: matthewbaggett/github-action-ijhttp@0.1.0
+        with:
+          http_file: test/test.http
+          environments_file: test/http-client.env.json
+          selected_environment: test
