@@ -14,7 +14,8 @@ jobs:
   ijhttp-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Run ijhttp
+      - id: ijhttp
+        name: Run ijhttp
         uses: ./. # Use the local action
         with:
           http_file: test/test.http
@@ -24,3 +25,7 @@ jobs:
             foo=bar
             baz=qux
           secrets: magic_word=please
+      - name: Get the report
+        run: |
+          echo "Selected Environment: ${{ steps.ijhttp.outputs.selected_environment }}"
+          echo "Report: ${{ steps.ijhttp.outputs.report }}"

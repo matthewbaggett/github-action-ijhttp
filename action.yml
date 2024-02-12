@@ -20,13 +20,15 @@ inputs:
     required: false
 
 outputs:
+  selected_environment:
+    description: Environment
   report:
     description: Report contents
 
 runs:
   using: docker
-  image: docker://ghcr.io/matthewbaggett/github-action-ijhttp:latest
-  #image: Dockerfile
+  #image: docker://ghcr.io/matthewbaggett/github-action-ijhttp:latest
+  image: Dockerfile
   env:
     HTTP_FILE: ${{ inputs.http_file }}
     ENVIRONMENTS_FILE: ${{ inputs.environments_file }}
