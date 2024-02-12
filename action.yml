@@ -27,8 +27,8 @@ outputs:
 
 runs:
   using: docker
-  #image: docker://ghcr.io/matthewbaggett/github-action-ijhttp:latest
-  image: Dockerfile
+  image: docker://ghcr.io/matthewbaggett/github-action-ijhttp:latest
+  #image: Dockerfile
   env:
     HTTP_FILE: ${{ inputs.http_file }}
     ENVIRONMENTS_FILE: ${{ inputs.environments_file }}

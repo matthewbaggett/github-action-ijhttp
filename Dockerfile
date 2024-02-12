@@ -1,6 +1,9 @@
 # trivy
 FROM alpine:3.18
-LABEL maintainer="Matthew Baggett <matthew@baggett.me>"
+
+LABEL maintainer="Matthew Baggett <matthew@baggett.me>" \
+      org.label-schema.vcs-url="https://github.com/matthewbaggett/github-action-ijhttp" \
+      org.opencontainers.image.source="https://github.com/matthewbaggett/github-action-ijhttp"
 
 # Install dependencies
 # hadolint ignore=DL3018
