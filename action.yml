@@ -12,6 +12,12 @@ inputs:
     description: Selected environment
     required: false
     default: default
+  variables:
+    description: list of variables to pass to the environment
+    required: false
+  secrets:
+    description: list of secrets to pass to the environment
+    required: false
 
 outputs:
   report:
@@ -20,10 +26,13 @@ outputs:
 runs:
   using: docker
   image: docker://ghcr.io/matthewbaggett/github-action-ijhttp:latest
+  #image: Dockerfile
   env:
     HTTP_FILE: ${{ inputs.http_file }}
     ENVIRONMENTS_FILE: ${{ inputs.environments_file }}
     SELECTED_ENVIRONMENT: ${{ inputs.selected_environment }}
+    VARIABLES: ${{ inputs.variables }}
+    SECRETS: ${{ inputs.secrets }}
 
 branding:
   icon: check-square

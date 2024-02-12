@@ -20,3 +20,7 @@ jobs:
           http_file: test/test.http
           environments_file: test/http-client.env.json
           selected_environment: test
+          variables: |
+            foo=bar
+            baz=qux
+          secrets: magic_word=please
