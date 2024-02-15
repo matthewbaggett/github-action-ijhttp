@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -xe
 # For each new line seperated entry in $VARIABLES, prefix it with --env-variables=
 VARIABLES=$(echo "${VARIABLES}" | sed -e 's| |\n|g' -e '/^$/d' -e 's|^|--env-variables=|g')
 # Same for SECRETS with --private-env-variables
