@@ -23,7 +23,7 @@ RUN wget -q -O "ijhttp.zip" "https://jb.gg/ijhttp/latest" && \
     unzip -q "ijhttp.zip" -d "/opt" && \
     rm "ijhttp.zip"
 
-WORKDIR /github/workspace
+WORKDIR /action/workspace
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

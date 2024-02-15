@@ -77,7 +77,7 @@ jobs:
             org.opencontainers.image.description=GitHub Action for IJHTTP
             org.opencontainers.image.vendor=Matthew Baggett
           tags: |
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest,enable=true
             type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
@@ -112,6 +112,7 @@ jobs:
           context: .
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          annotations: ${{ steps.meta.outputs.annotations }}
           platforms: |
             linux/amd64
             linux/arm64
@@ -119,3 +120,10 @@ jobs:
           push: true
           cache-from: ${{ !env.ACT && 'type=gha,scope=ijhttp-' || '' }}
           cache-to: ${{ !env.ACT && 'type=gha,mode=max,scope=ijhttp-' || '' }}
+
+      - name: "Build: Output tags"
+        run: |
+          echo "Tags:"
+          ${{ steps.meta.outputs.tags }}
+          echo "Build meta:"
+          ${{ steps.build.outputs.metadata }}
