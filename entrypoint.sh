@@ -5,6 +5,11 @@ VARIABLES=$(echo "${VARIABLES}" | sed -e 's| |\n|g' -e '/^$/d' -e 's|^|--env-var
 # Same for SECRETS with --private-env-variables
 SECRETS=$(echo "${SECRETS}" | sed -e 's| |\n|g' -e '/^$/d' -e 's|^|--private-env-variables=|g')
 
+echo "pwd:"
+pwd
+echo "ls -lah ./"
+ls -lah ./
+
 # shellcheck disable=SC2086,SC2312
 /opt/ijhttp/ijhttp \
 	${ENVIRONMENTS_FILE:+--env-file=${ENVIRONMENTS_FILE}} \
